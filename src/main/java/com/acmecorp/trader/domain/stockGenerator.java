@@ -5,10 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.stream.Stream;
-
-import groovyjarjarantlr.collections.List;
-
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -30,12 +27,13 @@ public class stockGenerator {
 			}
 		//creating the data
 		
-		ArrayList rowContent = new ArrayList<String>(); 
+		List<String> rowContent = new ArrayList<String>(); 
 		double open;
 		double high;
 		double low;
 		double close;
 		double volume;
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
 		Calendar c = Calendar.getInstance();
 		c.setTime(startDate);
 
@@ -48,18 +46,13 @@ public class stockGenerator {
 			close = 80 * (1.1 * Math.random());
 			volume = 2000000 * (1.2 * Math.random());
 			
-			rowContent.add(startDate.toString() + "," + open + "," + high + "," + low + "," + close + "," + volume);
+			rowContent.add(formatter.format(c.getTime()) + "," + open + "," + high + "," + low + "," + close + "," + volume);
 			c.add(Calendar.DAY_OF_MONTH, 1);
-			startDate = c.getTime();
-			
 		}
 
-		
 		try {
 	
 		Files.write(filePath, rowContent, StandardOpenOption.APPEND);
-		
-		//.getBytes(StandardCharsets.UTF_8)
 		
 		} catch (IOException e) {
 			e.printStackTrace();
