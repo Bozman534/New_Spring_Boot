@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 public class ReadStockFile {
 
-	public static void readStocks (String stockName) {
+	public static Stream<String> readStocks (String stockName) {
 		
 		String filePath = "/home/java/java_courses/fidelity-workshop/trader/" + stockName + ".csv";
 		
@@ -20,6 +20,7 @@ public class ReadStockFile {
 			}
 		
 		stockStream.forEach(System.out::println);
+		return stockStream;
 		
 	}
 	
