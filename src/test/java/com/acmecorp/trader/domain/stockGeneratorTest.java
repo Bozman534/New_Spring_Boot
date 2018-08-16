@@ -10,6 +10,8 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.stream.Stream;
+
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,16 +25,18 @@ public class stockGeneratorTest {
 	@Test
 	public void stockGeneratorTest () {
 		
-		SimpleDateFormat dateConvert = new SimpleDateFormat("mm/dd/yyyy");
+		SimpleDateFormat dateConvert = new SimpleDateFormat("MM/dd/yyyy");
 		String dateString = "06/30/2018";
 		String stockName = "AAPL";
 		int days = 7;
 		int genID = 1;
 		Path filePath = Paths.get("/home/java/java_courses/fidelity-workshop/trader/" + stockName + ".csv");
+		String testResults;
 		
 		try {
 		Date startDate = dateConvert.parse(dateString);
-		assertTrue(stockGenerator.generateStocks(startDate, days, stockName, genID));
+		Assert.assertEquals(testResults = stockGenerator.generateStocks(startDate, days, stockName, genID),
+				"Your file has been successfully created");
 		
 		Stream<String> fileData = ReadStockFile.readStocks("AAPL");
 		} catch (Exception e) {
