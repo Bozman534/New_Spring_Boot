@@ -13,7 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.nio.charset.StandardCharsets;
 
-public class stockGenerator {
+public class StockGenerator {
 
 	
 	
@@ -21,7 +21,7 @@ public class stockGenerator {
 		String status = "default status";
 		
 		//create the Path
-		Path filePath = Paths.get("/home/java/java_courses/fidelity-workshop/trader/" + stockName + ".csv");
+		Path filePath = Paths.get("/home/java/java_courses/fidelity-workshop/trader/Stocks/" + stockName + ".csv");
 		
 
 		//creating the data
@@ -40,7 +40,7 @@ public class stockGenerator {
 		
 		rowContent.add("Date,Open,High,Low,Close,Volume,mocked");
 		
-		
+		//Low Value Generator
 		if (genID == 1) {
 			
 		for (int i = 1; i <= days; i++){
@@ -54,6 +54,7 @@ public class stockGenerator {
 			c.add(Calendar.DATE, 1);
 			status = "Your file has been successfully created";
 		}
+		//Medium Value Generator
 		} else if (genID == 2) {
 			
 		for (int i = 1; i <= days; i++){
@@ -67,7 +68,7 @@ public class stockGenerator {
 			c.add(Calendar.DATE, 1);}
 			status = "Your file has been successfully created";
 			
-			
+			//High Value Generator
 		} else if (genID == 3) {
 			for (int i = 1; i <= days; i++){
 				open = 160 * (1.1 * Math.random());

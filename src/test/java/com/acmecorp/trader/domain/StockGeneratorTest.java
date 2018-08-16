@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.Assert;
@@ -20,7 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 
-public class stockGeneratorTest {
+public class StockGeneratorTest {
 
 	@Test
 	public void stockGeneratorTest () {
@@ -30,15 +31,15 @@ public class stockGeneratorTest {
 		String stockName = "AAPL";
 		int days = 7;
 		int genID = 1;
-		Path filePath = Paths.get("/home/java/java_courses/fidelity-workshop/trader/" + stockName + ".csv");
+		Path filePath = Paths.get("/home/java/java_courses/fidelity-workshop/trader/Stocks/" + stockName + ".csv");
 		String testResults;
 		
 		try {
 		Date startDate = dateConvert.parse(dateString);
-		Assert.assertEquals(testResults = stockGenerator.generateStocks(startDate, days, stockName, genID),
+		Assert.assertEquals(testResults = StockGenerator.generateStocks(startDate, days, stockName, genID),
 				"Your file has been successfully created");
 		
-		Stream<String> fileData = ReadStockFile.readStocks("AAPL");
+		List<String> fileData = ReadStockFile.readStocks("AAPL");
 		} catch (Exception e) {
 			e.printStackTrace();
 			}

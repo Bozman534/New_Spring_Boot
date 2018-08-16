@@ -1,12 +1,21 @@
 package com.acmecorp.trader.endpoints;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.acmecorp.trader.domain.stockGenerator;
+import com.acmecorp.trader.domain.StockGenerator;
 import com.acmecorp.trader.domain.GeneratorData;
+import com.acmecorp.trader.domain.ReadStockFile;
 
 @RestController
 @RequestMapping ("/stocks")
@@ -15,7 +24,7 @@ public class methodEndpoint {
 	@GetMapping (value = "/generator/get/genID")
 	public String generatorMetaData () {
 		int genID = GeneratorData.getGenID();
-		return "GenID = " + genID + " " + stockGenerator.generatorMetadata(genID);
+		return "GenID = " + genID + " " + StockGenerator.generatorMetadata(genID);
 		
 	}
 	
@@ -47,5 +56,41 @@ public class methodEndpoint {
 		return "Your generator stock name has been set to " + stockName;
 	}
 	
+	@GetMapping (value = "/generator/get/days")
+	public int getGeneratorDays () {
+		return GeneratorData.getDays();
+	}
+	
+	@GetMapping (value = "/generator/set/days/{days}")
+	public String setGeneratorDays (@PathVariable int days) {
+		GeneratorData.setDays(days);
+		return "Your generator days have been set to " + days;
+	}
+	
+	@GetMapping (value = "/generator/generate")
+	public String generatorGenerate () throws ParseException {
+		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+		String status = StockGenerator.generateStocks(formatter.parse(GeneratorData.getStartDate()), GeneratorData.getDays(),
+				GeneratorData.getStockName(), GeneratorData.getGenID());
+		return status;
+		
+	}
+	
+	@GetMapping (value = "/read/{stockName}")
+	public List<String>  readStockFile (@PathVariable String stockName) throws IOException {
+		List <String> stockList = new ArrayList <String> ();
+
+		stockList = ReadStockFile.readStocks(stockName);
+		
+		return stockList;
+	}
+	
+	@GetMapping (value = "/read/AllFiles")
+	public List<String> readAllFiles () throws IOException {
+		List <String> stockFiles = new ArrayList <String> ();
+		stockFiles = ReadStockFile.readAllStockFiles();
+		return stockFiles;
+		
+	}
 	
 }

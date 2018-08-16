@@ -2,26 +2,43 @@ package com.acmecorp.trader.domain;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 public class ReadStockFile {
 
-	public static Stream<String> readStocks (String stockName) {
+	public static List<String> readStocks (String stockName) throws IOException {
 		
-		String filePath = "/home/java/java_courses/fidelity-workshop/trader/" + stockName + ".csv";
+		String filePath = "/home/java/java_courses/fidelity-workshop/trader/Stocks/" + stockName + ".csv";
+
+		List<String> stockList = Files.lines(Paths.get(filePath))
+				.collect(Collectors.toList());
 		
-		Stream <String> stockStream = null;
+		return stockList;
 		
-		try {
-		stockStream = Files.lines(Paths.get(filePath));
-		} catch (IOException e) {
-			e.printStackTrace();
-			}
+	}
+
+	public static List<String> readAllStockFiles () throws IOException {
 		
-		stockStream.forEach(System.out::println);
-		return stockStream;
+		String filePath = "/home/java/java_courses/fidelity-workshop/trader/Stocks/";
+		List <Path> paths = Files.walk(Paths.get(filePath))
+				.filter(Files::isRegularFile)
+				.collect(Collectors.toList());
+		
+		List<String> fileNames = new ArrayList <String> ();
+		paths.stream().forEach(p -> fileNames.add(p.getFileName().toString()));
+				
+		return fileNames;
+		
+		
+
+
+	}
 		
 	}
 	
-}
+
