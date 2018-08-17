@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.acmecorp.trader.domain.StockGenerator;
 import com.acmecorp.trader.domain.GeneratorData;
 import com.acmecorp.trader.domain.ReadStockFile;
+import com.acmecorp.trader.domain.Stock;
+import com.acmecorp.trader.domain.DeleteStockFile;
 
 @RestController
 @RequestMapping ("/stocks")
-public class methodEndpoint {
+public class MethodEndpoint {
 
 	@GetMapping (value = "/generator/get/genID")
 	public String generatorMetaData () {
@@ -31,7 +33,7 @@ public class methodEndpoint {
 	@GetMapping (value = "/generator/set/genID/{genID}")
 	public String setGeneratorGenID (@PathVariable int genID) {
 		GeneratorData.setGenID(genID);
-		return "Your generator ID has been set to " + genID;
+		return "Your generator ID has been set to " + genID + ". " + StockGenerator.generatorMetadata(genID);
 	}
 	
 	@GetMapping (value = "/generator/get/startDate")
@@ -89,8 +91,19 @@ public class methodEndpoint {
 	public List<String> readAllFiles () throws IOException {
 		List <String> stockFiles = new ArrayList <String> ();
 		stockFiles = ReadStockFile.readAllStockFiles();
+		stockFiles.add(0, "There are " + stockFiles.size() + " stock files available. They are:");
 		return stockFiles;
 		
 	}
+	
+	@GetMapping (value = "/delete/{stockName}")
+	public String deleteFile (@PathVariable String stockName) throws IOException {
+		return DeleteStockFile.deleteSpecificFile(stockName);
+	}
+	
+	@GetMapping (value = "/read/AllStocks")
+	public List<Stock> readAllStocks () throws IOException {
+		return readAllStocks();
+		}
 	
 }

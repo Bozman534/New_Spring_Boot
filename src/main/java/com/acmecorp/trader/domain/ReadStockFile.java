@@ -31,6 +31,8 @@ public class ReadStockFile {
 		
 		List<String> fileNames = new ArrayList <String> ();
 		paths.stream().forEach(p -> fileNames.add(p.getFileName().toString()));
+		
+		fileNames.removeIf(p -> p.startsWith("."));
 				
 		return fileNames;
 		
