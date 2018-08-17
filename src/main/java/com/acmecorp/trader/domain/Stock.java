@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
 public class Stock 
 {
-	@Autowired
+
 	static String name;
 	static String date;
 	static double open;
@@ -43,63 +43,63 @@ public class Stock
 		return name;
 	}
 	
-	public static void setName (String name) {
+	public void setName (String name) {
 		Stock.name = name;
 	}
 	
-	public static String getDate () {
+	public String getDate () {
 		return date;
 	}
 	
-	public static void setDate (String date) {
+	public void setDate (String date) {
 		Stock.date = date;
 	}
 	
-	public static double getOpen () {
+	public double getOpen () {
 		return open;
 	}
 	
-	public static void setOpen (double open) {
+	public void setOpen (double open) {
 		Stock.open = open;
 	}
 	
-	public static double getHigh () {
+	public double getHigh () {
 		return high;
 	}
 	
-	public static void setHigh (double high) {
+	public void setHigh (double high) {
 		Stock.high = high;
 	}
 	
-	public static double getLow () {
+	public double getLow () {
 		return low;
 	}
 	
-	public static void setLow (double low) {
+	public void setLow (double low) {
 		Stock.low = low;
 	}
 	
-	public static double getClose () {
+	public double getClose () {
 		return close;
 	}
 	
-	public static void setClose (double close) {
+	public void setClose (double close) {
 		Stock.close = close;
 	}
 	
-	public static double getVolume() {
+	public double getVolume() {
 		return volume;
 		}
 	
-	public static void setVolume(double volume) {
+	public void setVolume(double volume) {
 		Stock.volume = volume;
 	}
 
-	public static String getMocked ()  {
+	public String getMocked ()  {
 		return mocked;
 		}
 	
-	public static void setMocked (String mocked) {
+	public void setMocked (String mocked) {
 		Stock.mocked = mocked;
 	}
 	
