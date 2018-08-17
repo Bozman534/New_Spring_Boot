@@ -41,7 +41,8 @@ public class StockLoader {
 				tempStock.setClose(Double.parseDouble(stockData[4]));
 				tempStock.setVolume(Double.parseDouble(stockData[5]));
 				tempStock.setMocked(stockData[6]);
-				stocks.add(tempStock);								
+				stocks.add(tempStock);	
+				
 			}
 			
 		}
