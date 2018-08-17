@@ -7,7 +7,17 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Stock {
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+
+
+
+
+public class Stock 
+{
+	@Autowired
 	static String name;
 	static String date;
 	static double open;
@@ -17,7 +27,19 @@ public class Stock {
 	static double volume;
 	static String mocked;
 	
-	public static String getName () {
+	public Stock() {
+		Stock.name = "DEF";
+		Stock.date = "08-17-2018";
+		Stock.open = 67;
+		Stock.high = 87;
+		Stock.low = 66;
+		Stock.close = 68;
+		Stock.volume = 20102002;
+		Stock.mocked = "mocked";
+			
+	}
+	
+	public String getName () {
 		return name;
 	}
 	

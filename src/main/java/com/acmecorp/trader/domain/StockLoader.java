@@ -14,7 +14,7 @@ import com.acmecorp.trader.domain.Stock;
 
 public class StockLoader {
 
-	public List<Stock> loadStocks() throws IOException  {
+	public static List<Stock> loadStocks() throws IOException  {
 				
 		String filePath = "/home/java/java_courses/fidelity-workshop/trader/Stocks/";
 		List <Path> paths = Files.walk(Paths.get(filePath))
@@ -28,7 +28,7 @@ public class StockLoader {
 		BufferedReader br = new BufferedReader(new FileReader(path.toFile()));
 		String name = path.getFileName().toString();
 		name = name.replaceAll(".csv", "");
-		
+		br.readLine();
 			while((line = br.readLine()) != null) {
 				String[] stockData = line.split(",");
 				Stock tempStock = new Stock();
@@ -40,8 +40,10 @@ public class StockLoader {
 				tempStock.setLow(Double.parseDouble(stockData[3]));
 				tempStock.setClose(Double.parseDouble(stockData[4]));
 				tempStock.setVolume(Double.parseDouble(stockData[5]));
+				tempStock.setMocked(stockData[6]);
 				stocks.add(tempStock);								
 			}
+			
 		}
 		return stocks;
 	}

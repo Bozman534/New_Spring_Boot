@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.acmecorp.trader.domain.StockGenerator;
+import com.acmecorp.trader.domain.StockLoader;
 import com.acmecorp.trader.domain.GeneratorData;
 import com.acmecorp.trader.domain.ReadStockFile;
 import com.acmecorp.trader.domain.Stock;
@@ -103,7 +104,7 @@ public class MethodEndpoint {
 	
 	@GetMapping (value = "/read/AllStocks")
 	public List<Stock> readAllStocks () throws IOException {
-		return readAllStocks();
+		return StockLoader.loadStocks();
 		}
 	
 }
